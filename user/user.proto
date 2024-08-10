@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+option go_package = "generated/users";
+
+package user;
+
+service UserService {
+  rpc GetUserProfile(UserID) returns (UserResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (UserResponse);
+  rpc DeleteUser(UserID) returns (Message);
+  rpc GetAllUsers(GetAllUsersRequest) returns (GetAllUsersResponse);
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+}
+
+message CreateUserResponse {
+  string id = 1;
+  string email = 2;
+  string firstName = 3;
+  string lastName = 4;
+  string dataOfBirthday = 5;
+  string gender = 6;
+}
+
+message CreateUserRequest {
+  string email = 1;
+  string password = 2;
+  string firstName = 3;
+  string lastName = 4;
+  string dataOfBirthday = 5;
+  string gender = 6;
+  string role = 7;
+}
+
+message GetAllUsersResponse {
+  repeated UserResponse users = 1;
+}
+
+message GetAllUsersRequest {
+  int64 limit = 1;
+  int64 offset = 2;
+  string gender = 3;
+  string firstName = 4;
+}
+
+message UpdateUserRequest {
+  string Id = 1;
+  string firstName = 2;
+  string LastName = 3;
+  string dataOfBirthday = 4;
+}
+
+message UserResponse {
+  string email = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string dataOfBirthday = 4;
+  string gender = 5;
+}
+
+message Message {
+  string message = 1;
+}
+
+message UserID {
+  string id = 1;
+}
