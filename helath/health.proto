@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+option go_package = "generated/healthAnalytics";
+
+package health;
+
+service HealthRecommendationsService {
+  //----------------- Health Recommendations --------------------
+  rpc GenerateHealthRecommendations(HealthRecommendationReq) returns (HealthRecommendation);
+  rpc GetHealthRecommendations(HealthRecommendationID) returns (HealthRecommendation);
+  rpc GetAllHealthRecommendations(UserID) returns (UserHealthRecommendation);
+
+  // ----------------- Health Monitoring -----------------------
+  rpc GetRealtimeHealthMonitoring(Void) returns (Monitoring);
+  rpc GetDailyHealthSummary(Void) returns (Monitoring);
+  rpc GetWeeklyHealthSummary(Void) returns (Monitoring);
+}
+
+message Monitoring {
+  string message = 1;
+  int64 totalUsers = 2;
+  int64 countDoctors = 3;
+  int64 countPatients = 4;
+  int64 countHealthRecommendation = 5;
+  string bestRecommendationID = 6;
+}
+
+message Void {}
+
+//------------ Health Recommendations -----------------
+message UserHealthRecommendation {
+  repeated HealthRecommendationReq healthRecommends = 1;
+}
+
+message UserID {
+  string id = 1;
+}
+
+message HealthRecommendationID {
+  string id = 1;
+}
+
+message HealthRecommendation {
+  string id = 1;
+  string userId = 2;
+  string recommendationType = 3;
+  string description = 4;
+  int64 priority = 5;
+  string createdAt = 6;
+  string UpdatedAt = 7;
+}
+
+message HealthRecommendationReq {
+  string userId = 1;
+  string recommendationType = 2;
+  string description = 3;
+  int64 priority = 4;
+}

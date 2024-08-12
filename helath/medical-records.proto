@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+option go_package = "generated/healthAnalytics";
+
+package health;
+
+service MedicalRecordsService {
+  // --------------- Medical Records -------------------------
+  rpc AddMedicalRecord(AddMedicalRecordRequest) returns (MedicalRecord);
+  rpc GetMedicalRecord(MedicalRecordID) returns(MedicalRecord);
+  rpc UpdateMedicalRecord(UpdateMedicalRecordReq) returns (MedicalRecord);
+  rpc DeleteMedicalRecord(MedicalRecordID) returns (Message1);
+  rpc ListMedicalRecords(MedicalRecordFilter) returns (ListMedicalRecord);
+}
+
+message ListMedicalRecord {
+  repeated MedicalRecord medicalRecords = 1;
+}
+
+message MedicalRecordFilter {
+  int64 limit = 1;
+  int64 offset = 2;
+  string description = 3;
+  string doctorId = 4;
+}
+
+message Message1 {
+  string message = 1;
+}
+
+message UpdateMedicalRecordReq {
+  string id = 1;
+  string recordType = 2;
+  string recordDate = 3;
+}
+
+message MedicalRecordID {
+  string id = 1;
+}
+
+message AddMedicalRecordRequest {
+  string userId = 1;
+  string recordType = 2;
+  string recordDate = 3;
+  string description = 4;
+  string doctorId = 5;
+  repeated string attachments = 6;
+}
+
+message MedicalRecord {
+  string id = 1;
+  string userId = 2;
+  string recordType = 3;
+  string recordDate = 4;
+  string description = 5;
+  string doctorId = 6;
+  repeated string attachments = 7;
+  string createdAt = 8;
+  string updatedAt = 9;
+}

@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+option go_package = "generated/healthAnalytics";
+
+package health;
+
+service WearableData {
+  rpc AddWearableData(WearableDate) returns (WearableDataResponse);
+  rpc GetWearableData(WearableDataID) returns (WearableDataResponse);
+  rpc GetAllWearableData(WearableDataFilter) returns (AllWearableData);
+  rpc UpdateWearableData(UpdateWearableDate) returns (WearableDataResponse);
+  rpc DeleteWearableData(WearableDataID) returns (Message2);
+}
+
+message Message2 {
+  string message = 1;
+}
+
+message WearableDate {
+  string userId = 1;
+  string deviceType = 2;
+  string dataType = 3;
+  string dataValue = 4;
+  string recordedTime = 5;
+}
+
+message UpdateWearableDate {
+  string id = 1;
+  string deviceType = 2;
+  string dataType = 3;
+  string dataValue = 4;
+}
+
+message AllWearableData {
+  repeated WearableDataResponse wearableData = 1;
+}
+
+message WearableDataFilter {
+  int64 limit = 1;
+  int64 offset = 2;
+  string deviceType = 3;
+}
+
+message WearableDataID {
+  string id = 1;
+}
+
+message WearableDataResponse {
+  string id = 1;
+  string userId = 2;
+  string deviceType = 3;
+  string dataType = 4;
+  string dataValue = 5;
+  string recordedTime = 6;
+  string createAt = 7;
+  string updateAt = 8;
+}

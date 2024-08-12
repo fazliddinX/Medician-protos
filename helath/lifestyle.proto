@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+option go_package = "generated/healthAnalytics";
+
+package health;
+
+service LifestyleService {
+  rpc AddLifestyleData(Lifestyle) returns (LifestyleResponse);
+  rpc GetLifestyleData(LifestyleID) returns (LifestyleResponse);
+  rpc GetAllLifestyleData(LifestyleFilter) returns (AllLifestyles);
+  rpc UpdateLifestyleData(UpdateLifestyle) returns (LifestyleResponse);
+  rpc DeleteLifestyleData(LifestyleID) returns (Message);
+}
+
+message Message {
+  string message = 1;
+}
+
+message UpdateLifestyle {
+  string id = 1;
+  string dataType = 2;
+  string dataValue = 3;
+}
+
+message AllLifestyles {
+  repeated LifestyleResponse lifestyles = 1;
+}
+
+message LifestyleFilter {
+  int64 limit = 1;
+  int64 offset = 2;
+}
+
+message LifestyleID {
+  string id = 1;
+}
+
+message LifestyleResponse {
+  string id = 1;
+  string userId = 2;
+  string dataType = 3;
+  string dataValue = 4;
+  string recordedData = 5;
+  string createdAt = 6;
+  string updatedAt = 7;
+}
+
+message Lifestyle {
+  string userId = 1;
+  string dataType = 2;
+  string dataValue = 3;
+  string recordedData = 4;
+}
