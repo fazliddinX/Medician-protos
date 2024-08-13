@@ -52,6 +52,6 @@ message WearableDataResponse {
   string dataType = 4;
   string dataValue = 5;
   string recordedTime = 6;
-  string createAt = 7;
-  string updateAt = 8;
+  string createdAt = 7;
+  string updatedAt = 8;
 }
