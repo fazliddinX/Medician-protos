@@ -11,18 +11,47 @@ service HealthRecommendationsService {
   rpc GetAllHealthRecommendations(UserID) returns (UserHealthRecommendation);
 
   // ----------------- Health Monitoring -----------------------
-  rpc GetRealtimeHealthMonitoring(Void) returns (Monitoring);
+  rpc GetRealtimeHealthMonitoring(Void) returns (MonitoringRealTime);
   rpc GetDailyHealthSummary(Void) returns (Monitoring);
   rpc GetWeeklyHealthSummary(Void) returns (Monitoring);
 }
 
+message MonitoringRealTime {
+  string Message = 1;
+  Lifestyles lifestyle = 2;
+  MedicalRecords medRecords = 3;
+  WearableDates wearableData = 4;
+}
+
 message Monitoring {
-  string message = 1;
-  int64 totalUsers = 2;
-  int64 countDoctors = 3;
-  int64 countPatients = 4;
-  int64 countHealthRecommendation = 5;
-  string bestRecommendationID = 6;
+  string Message = 1;
+  repeated Lifestyles lifestyle = 2;
+  repeated MedicalRecords medRecords = 3;
+  repeated WearableDates wearableData = 4;
+}
+
+message MedicalRecords {
+  string userId = 1;
+  string recordType = 2;
+  string recordDate = 3;
+  string description = 4;
+  string doctorId = 5;
+  repeated string attachments = 6;
+}
+
+message Lifestyles {
+  string userId = 1;
+  string dataType = 2;
+  string dataValue = 3;
+  string recordedData = 4;
+}
+
+message WearableDates {
+  string userId = 1;
+  string deviceType = 2;
+  string dataType = 3;
+  string dataValue = 4;
+  string recordedTime = 5;
 }
 
 message Void {}
