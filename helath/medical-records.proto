@@ -39,12 +39,13 @@ message MedicalRecordID {
 }
 
 message AddMedicalRecordRequest {
-  string userId = 1;
-  string recordType = 2;
-  string recordDate = 3;
-  string description = 4;
-  string doctorId = 5;
-  repeated string attachments = 6;
+  string id = 1;
+  string userId = 2;
+  string recordType = 3;
+  string recordDate = 4;
+  string description = 5;
+  string doctorId = 6;
+  repeated string attachments = 7;
 }
 
 message MedicalRecord {
